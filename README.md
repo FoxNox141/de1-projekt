@@ -13,7 +13,7 @@ An abstract is a short summary of your project, usually about a paragraph (6-7 s
 
 The main contributions of the project are:
 
-* LV: Data transfer, regulation, connections, diagrams
+* LV: Data transfer, regulation, connections, diagrams, 7segment
 * EM: CLK, Time Counters, buttons and some connections, GitHub
 * SS: Alarm, Stopwatch and buttons for them
 
