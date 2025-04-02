@@ -1,10 +1,10 @@
-# de1-projekt
+# DE1-PROJEKT
 
 ### Team members
 
-# - Lukáš Vizina
-# - Erik Maděránek
-# - Samuel Sedmák
+#### - Lukáš Vizina
+#### - Erik Maděránek
+#### - Samuel Sedmák
 
 ### Abstract
 
