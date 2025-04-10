@@ -1,0 +1,223 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity TimeBlock is
+    Port (
+        -- Inputs
+        CLK             : in  STD_LOGIC;  -- 100 MHz
+        ModeSelect      : in  STD_LOGIC;
+        UP              : in  STD_LOGIC;
+        DOWN            : in  STD_LOGIC;
+        LEFT            : in  STD_LOGIC;
+        RIGHT           : in  STD_LOGIC;
+        CENTER          : in  STD_LOGIC;
+
+        -- Outputs
+        TimeEdit            : out STD_LOGIC;
+        ModeSelectDisable   : out STD_LOGIC;
+        Sec1                : out STD_LOGIC_VECTOR (3 downto 0);
+        Sec10               : out STD_LOGIC_VECTOR (3 downto 0);
+        Min1                : out STD_LOGIC_VECTOR (3 downto 0);
+        Min10               : out STD_LOGIC_VECTOR (3 downto 0);
+        Hour1               : out STD_LOGIC_VECTOR (3 downto 0);
+        Hour10              : out STD_LOGIC_VECTOR (3 downto 0);
+        Symbol              : out STD_LOGIC
+    );
+end TimeBlock;
+
+architecture Behavioral of TimeBlock is
+
+    -- Time storage
+    signal seconds     : unsigned(5 downto 0) := (others => '0'); -- 0-59
+    signal minutes     : unsigned(5 downto 0) := (others => '0'); -- 0-59
+    signal hours       : unsigned(5 downto 0) := (others => '0'); -- 0-23
+
+    -- Edit control
+    signal edit_mode   : STD_LOGIC := '0';
+    signal symbol_clk  : STD_LOGIC := '0';
+
+    -- 1s clock tick counter (100 MHz = 100_000_000 cycles per sec)
+    signal tick_1s_counter : unsigned(26 downto 0) := (others => '0'); -- 27 bits for 100M
+
+    -- Blinking symbol (100Hz from 100MHz)
+    signal blink_div   : unsigned(19 downto 0) := (others => '0');
+
+    -- Edge detection
+    signal center_prev : STD_LOGIC := '0';
+    signal up_prev     : STD_LOGIC := '0';
+
+    -- Time Unit Navigation
+    signal active_unit : integer range 0 to 2 := 0; -- 0 = Seconds, 1 = Minutes, 2 = Hours
+
+begin
+
+    -------------------------------------------------
+    -- 1s Time Counter from 100 MHz Clock
+    -------------------------------------------------
+    process(CLK)
+    begin
+        if rising_edge(CLK) then
+            if tick_1s_counter = 99_999_999 then
+                tick_1s_counter <= (others => '0');
+
+                if edit_mode = '0' then  -- Only update real-time when not editing
+                    -- Time increment logic
+                    if seconds = 59 then
+                        seconds <= (others => '0');
+                        if minutes = 59 then
+                            minutes <= (others => '0');
+                            if hours = 23 then
+                                hours <= (others => '0');
+                            else
+                                hours <= hours + 1;
+                            end if;
+                        else
+                            minutes <= minutes + 1;
+                        end if;
+                    else
+                        seconds <= seconds + 1;
+                    end if;
+                end if;
+            else
+                tick_1s_counter <= tick_1s_counter + 1;
+            end if;
+        end if;
+    end process;
+
+    -------------------------------------------------
+    -- Symbol Blinking Clock (100Hz from 100MHz)
+    -------------------------------------------------
+    process(CLK)
+    begin
+        if rising_edge(CLK) then
+            if blink_div = 999_999 then
+                blink_div <= (others => '0');
+                symbol_clk <= not symbol_clk;
+            else
+                blink_div <= blink_div + 1;
+            end if;
+        end if;
+    end process;
+
+    Symbol <= symbol_clk;
+
+    -------------------------------------------------
+    -- CENTER Press Handling: Toggle TimeEdit
+    -------------------------------------------------
+    process(CLK)
+    begin
+        if rising_edge(CLK) then
+            if CENTER = '1' and center_prev = '0' then
+                if ModeSelect = '1' then
+                    edit_mode <= '1';  -- Enter TimeEdit
+                elsif edit_mode = '1' then
+                    edit_mode <= '0';  -- Exit TimeEdit
+                end if;
+            end if;
+            center_prev <= CENTER;
+        end if;
+    end process;
+
+    TimeEdit <= edit_mode;
+    ModeSelectDisable <= edit_mode;
+
+    -------------------------------------------------
+    -- LEFT/RIGHT Navigation: Cycle through time units
+    -------------------------------------------------
+    process(CLK)
+    begin
+        if rising_edge(CLK) then
+            if LEFT = '1' then
+                -- Move to previous time unit (wrap around)
+                if active_unit = 0 then
+                    active_unit <= 2;  -- Move from Seconds to Hours
+                else
+                    active_unit <= active_unit - 1;  -- Move one step back
+                end if;
+            elsif RIGHT = '1' then
+                -- Move to next time unit (wrap around)
+                if active_unit = 2 then
+                    active_unit <= 0;  -- Move from Hours to Seconds
+                else
+                    active_unit <= active_unit + 1;  -- Move one step forward
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -------------------------------------------------
+    -- UP Button: Add time to selected unit
+    -------------------------------------------------
+    process(CLK)
+    begin
+        if rising_edge(CLK) then
+            if UP = '1' and up_prev = '0' then
+                if edit_mode = '1' then
+                    case active_unit is
+                        when 0 =>  -- Seconds
+                            if seconds = 59 then
+                                seconds <= (others => '0');
+                                if minutes = 59 then
+                                    minutes <= (others => '0');
+                                    if hours = 23 then
+                                        hours <= (others => '0');
+                                    else
+                                        hours <= hours + 1;
+                                    end if;
+                                else
+                                    minutes <= minutes + 1;
+                                end if;
+                            else
+                                seconds <= seconds + 1;
+                            end if;
+                        when 1 =>  -- Minutes
+                            if minutes = 59 then
+                                minutes <= (others => '0');
+                                if hours = 23 then
+                                    hours <= (others => '0');
+                                else
+                                    hours <= hours + 1;
+                                end if;
+                            else
+                                minutes <= minutes + 1;
+                            end if;
+                        when 2 =>  -- Hours
+                            if hours = 23 then
+                                hours <= (others => '0');
+                            else
+                                hours <= hours + 1;
+                            end if;
+                        when others => null; -- Safety
+                    end case;
+                end if;
+            end if;
+            up_prev <= UP;
+        end if;
+    end process;
+
+    -------------------------------------------------
+    -- DOWN Button (optional): Decrement Seconds
+    -------------------------------------------------
+    process(CLK)
+    begin
+        if rising_edge(CLK) then
+            if DOWN = '1' and edit_mode = '1' then
+                if seconds > 0 then
+                    seconds <= seconds - 1;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -------------------------------------------------
+    -- Output time breakdown to BCD nibbles
+    -------------------------------------------------
+    Sec1   <= std_logic_vector(seconds mod 10);
+    Sec10  <= std_logic_vector(seconds / 10);
+    Min1   <= std_logic_vector(minutes mod 10);
+    Min10  <= std_logic_vector(minutes / 10);
+    Hour1  <= std_logic_vector(hours mod 10);
+    Hour10 <= std_logic_vector(hours / 10);
+
+end Behavioral;
