@@ -28,6 +28,20 @@ end TimeBlock;
 
 architecture Behavioral of TimeBlock is
 
+    -- Component declaration for the counter
+    component cnt_up_down_2
+        generic(
+            g_CNT_WIDTH : natural := 4
+        );
+        port(
+            clk      : in  std_logic;
+            reset    : in  std_logic;
+            en_i     : in  std_logic;
+            cnt_up_i : in  std_logic;
+            cnt_o    : out std_logic_vector(g_CNT_WIDTH - 1 downto 0)
+        );
+    end component;
+
     -- Time storage
     signal seconds     : unsigned(5 downto 0) := (others => '0'); -- 0-59
     signal minutes     : unsigned(5 downto 0) := (others => '0'); -- 0-59
@@ -38,7 +52,7 @@ architecture Behavioral of TimeBlock is
     signal symbol_clk  : STD_LOGIC := '0';
 
     -- 1s clock tick counter (100 MHz = 100_000_000 cycles per sec)
-    signal tick_1s_counter : unsigned(26 downto 0) := (others => '0'); -- 27 bits for 100M
+    signal tick_1s_counter : unsigned(26 downto 0) := (others => '0');
 
     -- Blinking symbol (100Hz from 100MHz)
     signal blink_div   : unsigned(19 downto 0) := (others => '0');
@@ -50,7 +64,25 @@ architecture Behavioral of TimeBlock is
     -- Time Unit Navigation
     signal active_unit : integer range 0 to 2 := 0; -- 0 = Seconds, 1 = Minutes, 2 = Hours
 
+    -- Signal for counter output (example counter integration)
+    signal counter_val : std_logic_vector(3 downto 0);
+
 begin
+
+    -------------------------------------------------
+    -- Instantiate 4-bit Up/Down Counter
+    -------------------------------------------------
+    second_counter : cnt_up_down_2
+        generic map (
+            g_CNT_WIDTH => 4
+        )
+        port map (
+            clk      => CLK100MHz,
+            reset    => '0',
+            en_i     => edit_mode,
+            cnt_up_i => UP,
+            cnt_o    => counter_val
+        );
 
     -------------------------------------------------
     -- 1s Time Counter from 100 MHz Clock
@@ -129,18 +161,16 @@ begin
     begin
         if rising_edge(CLK) then
             if LEFT = '1' then
-                -- Move to previous time unit (wrap around)
                 if active_unit = 0 then
-                    active_unit <= 2;  -- Move from Seconds to Hours
+                    active_unit <= 2;
                 else
-                    active_unit <= active_unit - 1;  -- Move one step back
+                    active_unit <= active_unit - 1;
                 end if;
             elsif RIGHT = '1' then
-                -- Move to next time unit (wrap around)
                 if active_unit = 2 then
-                    active_unit <= 0;  -- Move from Hours to Seconds
+                    active_unit <= 0;
                 else
-                    active_unit <= active_unit + 1;  -- Move one step forward
+                    active_unit <= active_unit + 1;
                 end if;
             end if;
         end if;
@@ -188,7 +218,7 @@ begin
                             else
                                 hours <= hours + 1;
                             end if;
-                        when others => null; -- Safety
+                        when others => null;
                     end case;
                 end if;
             end if;
