@@ -130,16 +130,7 @@ All the main blocks are interconnected in the `top.vhd` module and connected to 
 
 <a name="video"></a>
 
-## Video
-
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/kt7w2j_RhDY/0.jpg)](http://www.youtube.com/watch?v=kt7w2j_RhDY "Digital clock - presentation")
-
-<a name="references"></a>
 
 ## References
 
-1. Verilog and VHDL Code for Digital Clock [online]. [cit. 2022-04-16]. Available at: https://vlsicoding.blogspot.com/2016/01/vhdl-code-for-digital-clock.html
-2. How do I convert an 8-bit binary number to BCD in VHDL? [online]. [cit. 2022-04-21]. Available at: https://www.quora.com/How-do-I-convert-an-8-bit-binary-number-to-BCD-in-VHDL
-3. How to split an 8 bit BCD number into two separate 4 bit BCD numbers using logic gates or VHDL? [online]. [cit. 2022-04-21]. Available at: https://electronics.stackexchange.com/questions/546363/how-to-split-an-8-bit-bcd-number-into-two-separate-4-bit-bcd-numbers-using-logic
-4. Lesson 74 - Example 47: Debounce Pushbuttons [online]. [cit. 2022-04-26]. Available at: https://youtu.be/8ISfNm9zv18
-5. VHDL code for BCD to Binary conversion [online]. [cit. 2022-04-29]. Available at: https://vhdlguru.blogspot.com/2015/04/vhdl-code-for-bcd-to-binary-conversion.html
+
