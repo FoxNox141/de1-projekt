@@ -58,8 +58,8 @@ The clock is controlled by 5 buttons and 2 switches. The output peripherals are 
 
 ## VHDL modules description
 
-### `dig_clock.vhd`
-This module is responsible for the core operation of the digital clock. It receives a clock signal that is slowed down to a one-second interval using the clock_enable.vhd module, where the parameter g_MAX is set to 10,000,000. The seconds count increments every second, looping from 0 to 59 and then restarting at 0. Similarly, the minutes count increases by one when the seconds reach 59, also cycling up to 59. The hours count advances when the minutes reach 59, counting up to 23 before resetting back to 0.
+### `Timer.vhd`
+This module is responsible for the core operation of the digital clock. It receives a clock signal that is slowed down to a one-second interval using the clock_enable.vhd module, where the parameter N_PERIODS is set to 10,000,000 (100MHz). The seconds count increments every second, looping from 0 to 59 and then restarting at 0. Similarly, the minutes count increases by one when the seconds reach 59, also cycling up to 59. The hours count advances when the minutes reach 59, counting up to 23 before resetting back to 0.
 
 Initially, the clock starts at 00:00:00
 
