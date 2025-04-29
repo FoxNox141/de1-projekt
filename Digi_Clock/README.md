@@ -1,4 +1,4 @@
-# Digital clock (hh mm ss) with time/alarm setting
+# Digital clock, with Time and Alarm (hh/mm/ss)
 
 ### Team members
 
