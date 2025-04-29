@@ -1,1 +1,0 @@
---- This section is dedicated to the codes for buttons ---
