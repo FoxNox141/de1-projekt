@@ -53,7 +53,7 @@ The clock is controlled by 5 buttons and 2 switches. The output peripherals are 
    #### BASIC I/O schematic
    ![nexys basic scheme](images/nexys_basic_scheme.png)
    
-
+.
 <a name="modules"></a>
 
 ## VHDL modules description
