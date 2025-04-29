@@ -82,7 +82,7 @@ Mechanical pushbutton often generate fake transitions when pressed due to its me
 Using this module, we set the time and choose whether it is the time from which the clock should continue to run or the time in which the alarm should be triggered. Apart from standard clock signal and enable signal, there are 2 buttons as inputs, using which we set the hours and minutes, and one switch, which we activate the module with. The outputs of this block are the values of the hours and minutes we set.
 
 [clock_setter testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_clock_setter.vhd)
-![clock_setter simulation](images/tb_clock_setter.png)
+![clock_setter simulation](Graphs/tb_clock_setter.png)
 
 ### `cnt_up_down.vhd`
 Predesigned bidirectional counter from lab exercises used without any changes.
