@@ -1,41 +1,61 @@
-# DE1-PROJEKT
+# Digital clock, with Time and Alarm (hh/mm/ss)
 
 ### Team members
 
-#### - Lukáš Vizina
-#### - Erik Maděránek
-#### - Samuel Sedmák
+* Lukáš Vizina
+* Samuel Sedmák
+* Erik Maděránek
 
-### Abstract
+### Table of contents
 
-This project will focus on making a functioning clock, which will keep ascribing miliseconds into the clock, keeping the clock synchronized even when we change the clockm mode into stopwatch or switch mode to set an alarm. When turned back from either mode, the clock will keep counting and functioning properly, only not showing on the board. The clock will allow for showing seconds, minutes and hours. 
-An abstract is a short summary of your project, usually about a paragraph (6-7 sentences, 150-250 words) long. A well-written abstract serves multiple purposes: (a) an abstract lets readers get the gist or essence of your project quickly; (b) an abstract prepares readers to follow the detailed information, description, and results in your report; (c) and, later, an abstract helps readers remember key points from your project.
+* [Project objectives](#objectives)
+* [Hardware description](#hardware)
+* [VHDL modules description and simulations](#modules)
+* [TOP module description](#top)
+* [Video](#video)
+* [References](#references)
 
-The main contributions of the project are:
+<a name="objectives"></a>
 
-* LV: Data transfer, regulation, connections, diagrams, 7segment
-* EM: CLK, Time Counters, buttons and some connections, GitHub
-* SS: Alarm, Stopwatch and buttons for them
+## Project objectives
 
-[Photo(s) of your application with labels of individual parts.]
+Project goal is to implement digital clock on Nexys A7-50T board, including time setting and alarm function all in hh:mm:ss format.
 
-[Link to A3 project poster.]
+The clock is controlled by 5 buttons and 2 switches. The output peripherals are an integrated eight digit 7-segment display (only 6 digits are used in this project) and an RGB LED implementing the alarm function.
 
-[Optional: Link to your short video presentation.]
 
-## Hardware description of demo application
 
-Describe your implementation. Put a descriptive top-level schematic of your application.
+<a name="hardware"></a>
 
-## Software description
+## Hardware description
 
-Put flowchats/state diagrams of your algorithm(s) and direct links to source/testbench files in `src` and `sim` folders.
+   #### Nexys A7-50T
+   ![nexys board](images/nexys_board.png)
 
-### Component(s) simulations
+| **Callout** | **Component Description** | **Callout** | **Component Description** |
+   | :-: | :-: | :-: | :-: |
+   | 1 | 	Power jack | 16 | JTAG port for (optional) external cable |
+   | 2 | 	Power switch | 17 | Tri-color (RGB) LEDs |
+   | 3 | USB host connector | 18 | Slide switches (16) |
+   | 4 | PIC24 programming port (factory use) | 19 | LEDs (16) |
+   | 5 | Ethernet connector | 20 | Power supply test point(s) |
+   | 6 | FPGA programming done LED | 21 | Eight digit 7-seg display |
+   | 7 | VGA connector | 22 | Microphone |
+   | 8 | Audio connector | 23 | External configuration jumper (SD / USB) |
+   | 9 | Programming mode jumper | 24 | MicroSD card slot |
+   | 10 | Analog signal Pmod port (XADC) | 25 | Shared UART/ JTAG USB port |
+   | 11 | FPGA configuration reset button | 26 | Power select jumper and battery header |
+   | 12 | CPU reset button (for soft cores) | 27 | Power-good LED |
+   | 13 | Five pushbuttons | 28 | Xilinx Artix-7 FPGA |
+   | 14 | Pmod port(s) | 29 | DDR2 memory |
+   | 15 | Temperature sensor |  |  |
+   
+   #### BASIC I/O schematic
+   ![nexys basic scheme](images/nexys_basic_scheme.png)
+   
+.
+<a name="modules"></a>
 
-Write descriptive text and put simulation screenshots of components you created during the project.
+## VHDL modules description
 
-## References
-
-1. Put here the references and online tools you used.
-2. ...
+### `dig_clock.vhd`
