@@ -1,0 +1,38 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Wed Apr 23 15:21:22 2025
+# Process ID: 9744
+# Current directory: C:/Users/240215/Dig/Projekt/project_1
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10964 C:\Users\240215\Dig\Projekt\project_1\project_1.xpr
+# Log file: C:/Users/240215/Dig/Projekt/project_1/vivado.log
+# Journal file: C:/Users/240215/Dig/Projekt/project_1\vivado.jou
+#-----------------------------------------------------------
+start_guioopen_project C:/Users/240215/Dig/Projekt/project_1/project_1.xpr
+WARNING: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'C:/Users/240215/Dig/Projekt/project_1/project_1.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/appz/Xilinx/Vivado/2020.2/data/ip'.
+open_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:05 . Memory (MB): peak = 999.828 ; gain = 0.000
+update_compile_order -fileset sources_1update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+[Wed Apr 23 16:02:46 2025] Launched synth_1...
+Run output will be captured here: C:/Users/240215/Dig/Projekt/project_1/project_1.runs/synth_1/runme.log
+[Wed Apr 23 16:02:46 2025] Launched impl_1...
+Run output will be captured here: C:/Users/240215/Dig/Projekt/project_1/project_1.runs/impl_1/runme.log
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+[Wed Apr 23 16:03:24 2025] Launched synth_1...
+Run output will be captured here: C:/Users/240215/Dig/Projekt/project_1/project_1.runs/synth_1/runme.log
+[Wed Apr 23 16:03:24 2025] Launched impl_1...
+Run output will be captured here: C:/Users/240215/Dig/Projekt/project_1/project_1.runs/impl_1/runme.log
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Wed Apr 23 17:34:21 2025...

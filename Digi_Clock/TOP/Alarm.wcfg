@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_TopLevel_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="tb_TopLevel" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="158.400001 us"></ZoomEndTime>
+      <Cursor1Time time="1,000,000.000000 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="181"></NameColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="22" />
+   <wvobject fp_name="/tb_TopLevel/CLK100MHZ" type="logic">
+      <obj_property name="ElementShortName">CLK100MHZ</obj_property>
+      <obj_property name="ObjectShortName">CLK100MHZ</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/BTNC" type="logic">
+      <obj_property name="ElementShortName">BTNC</obj_property>
+      <obj_property name="ObjectShortName">BTNC</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/BTNU" type="logic">
+      <obj_property name="ElementShortName">BTNU</obj_property>
+      <obj_property name="ObjectShortName">BTNU</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/BTNL" type="logic">
+      <obj_property name="ElementShortName">BTNL</obj_property>
+      <obj_property name="ObjectShortName">BTNL</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/BTND" type="logic">
+      <obj_property name="ElementShortName">BTND</obj_property>
+      <obj_property name="ObjectShortName">BTND</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/U_TimeBlock/seconds" type="other">
+      <obj_property name="ElementShortName">seconds</obj_property>
+      <obj_property name="ObjectShortName">seconds</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/U_TimeBlock/minutes" type="other">
+      <obj_property name="ElementShortName">minutes</obj_property>
+      <obj_property name="ObjectShortName">minutes</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/U_TimeBlock/hours" type="other">
+      <obj_property name="ElementShortName">hours</obj_property>
+      <obj_property name="ObjectShortName">hours</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/U_TimeBlock/Sec1" type="array">
+      <obj_property name="ElementShortName">Sec1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Sec1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/U_TimeBlock/Sec10" type="array">
+      <obj_property name="ElementShortName">Sec10[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Sec10[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/U_TimeBlock/Min1" type="array">
+      <obj_property name="ElementShortName">Min1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Min1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/U_TimeBlock/Min10" type="array">
+      <obj_property name="ElementShortName">Min10[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Min10[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/U_TimeBlock/Hour1" type="array">
+      <obj_property name="ElementShortName">Hour1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Hour1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/U_TimeBlock/Hour10" type="array">
+      <obj_property name="ElementShortName">Hour10[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Hour10[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/Sig_T_10H" type="array">
+      <obj_property name="ElementShortName">Sig_T_10H[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Sig_T_10H[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/Sig_T_1H" type="array">
+      <obj_property name="ElementShortName">Sig_T_1H[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Sig_T_1H[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/Sig_T_10m" type="array">
+      <obj_property name="ElementShortName">Sig_T_10m[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Sig_T_10m[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/Sig_T_1m" type="array">
+      <obj_property name="ElementShortName">Sig_T_1m[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Sig_T_1m[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/Sig_T_10s" type="array">
+      <obj_property name="ElementShortName">Sig_T_10s[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Sig_T_10s[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/Sig_T_1s" type="array">
+      <obj_property name="ElementShortName">Sig_T_1s[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Sig_T_1s[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/Sig_SegOut" type="array">
+      <obj_property name="ElementShortName">Sig_SegOut[6:0]</obj_property>
+      <obj_property name="ObjectShortName">Sig_SegOut[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TopLevel/dut/Sig_AN" type="array">
+      <obj_property name="ElementShortName">Sig_AN[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Sig_AN[7:0]</obj_property>
+   </wvobject>
+</wave_config>

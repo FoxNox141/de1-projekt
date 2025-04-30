@@ -1,0 +1,22 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Wed Apr 23 15:21:22 2025
+# Process ID: 9744
+# Current directory: C:/Users/240215/Dig/Projekt/project_1
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10964 C:\Users\240215\Dig\Projekt\project_1\project_1.xpr
+# Log file: C:/Users/240215/Dig/Projekt/project_1/vivado.log
+# Journal file: C:/Users/240215/Dig/Projekt/project_1\vivado.jou
+#-----------------------------------------------------------
+start_guioopen_project C:/Users/240215/Dig/Projekt/project_1/project_1.xpruupdate_compile_order -fileset sources_1update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+wait_on_run impl_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+wait_on_run impl_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1

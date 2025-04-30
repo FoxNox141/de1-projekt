@@ -1,0 +1,178 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity alarm is
+    Port (
+        -- Vstupy
+        clk_100mhz     : in  STD_LOGIC;  -- 100 MHz hodiny
+        reset          : in  STD_LOGIC;  -- Reset (SW)
+        mode_select    : in  STD_LOGIC_VECTOR(2 downto 0);  -- Výber módu
+        up             : in  STD_LOGIC;  -- Tlačidlo hore
+        down           : in  STD_LOGIC;  -- Tlačidlo dole
+        left           : in  STD_LOGIC;  -- Tlačidlo vľavo
+        right          : in  STD_LOGIC;  -- Tlačidlo vpravo
+        center         : in  STD_LOGIC;  -- Tlačidlo center
+        hour10         : in  STD_LOGIC_VECTOR(3 downto 0);  -- Desiatky hodín
+        hour1          : in  STD_LOGIC_VECTOR(3 downto 0);  -- Jednotky hodín
+        min10          : in  STD_LOGIC_VECTOR(3 downto 0);  -- Desiatky minút
+        min1           : in  STD_LOGIC_VECTOR(3 downto 0);  -- Jednotky minút
+        -- Výstupy
+        time_editAlarm      : out STD_LOGIC:='0';  -- 0 = úprava hodín, 1 = úprava minút
+        modeselectdisableAlarm : out STD_LOGIC:='0';  -- Zakáže zmenu módu počas úpravy
+        alarm_out      : out STD_LOGIC  -- Výstup pre LED signalizáciu budíka
+    );
+end alarm;
+
+architecture Behavioral of alarm is
+    component clock_enable is
+        generic(
+            N_PERIODS : integer
+        );
+        Port (
+            clk   : in STD_LOGIC;
+            rst   : in STD_LOGIC;
+            pulse : out STD_LOGIC
+        );
+    end component;
+
+
+
+    signal alarm_hours     : signed(6 downto 0) := (others => '0');
+    signal alarm_minutes   : signed(6 downto 0) := (others => '0');
+    signal alarm_active    : STD_LOGIC := '0';
+
+    signal editEN          : STD_LOGIC := '0';
+    signal Sig_TimeEdit    : STD_LOGIC := '0';  -- 0 = hodiny, 1 = minúty
+
+    signal prev_UP         : STD_LOGIC := '0';
+    signal prev_DOWN       : STD_LOGIC := '0';
+    signal prev_LEFT       : STD_LOGIC := '0';
+    signal prev_RIGHT      : STD_LOGIC := '0';
+    signal prev_CENTER     : STD_LOGIC := '0';
+
+    signal clk_1hz         : STD_LOGIC := '0';
+    signal counter         : integer range 0 to 49_999_999 := 0;
+    signal led_blink       : STD_LOGIC := '0';
+
+begin
+
+
+    -- Instantiate 1s clock pulse generator
+    CLK_Pulse: component clock_enable
+        generic map(
+            N_PERIODS => 100_00  -- 100 MHz / 100_000_000 = 1s
+        )
+        port map(
+            clk   => clk_100mhz,
+            rst   => reset,
+            pulse => CLK_1hz
+        );
+
+    -- Blikanie LED
+    process(clk_1hz)
+    begin
+        if rising_edge(clk_1hz) then
+            led_blink <= not led_blink;
+        end if;
+    end process;
+
+    -- Hlavný proces
+    process(clk_100mhz)
+    begin
+        if rising_edge(clk_100mhz) then
+            if reset = '1' then
+                alarm_hours <= (others => '0');
+                alarm_minutes <= (others => '0');
+                alarm_active <= '0';
+                editEN <= '0';
+                Sig_TimeEdit <= '0';
+                prev_UP <= '0';
+                prev_DOWN <= '0';
+                prev_LEFT <= '0';
+                prev_RIGHT <= '0';
+                prev_CENTER <= '0';
+                alarm_out <= '0';
+                time_editAlarm <= '0';
+                modeselectdisableAlarm  <= '0';
+            else
+                -- Spustenie editácie (DOWN + mód)
+                if editEN = '0' then
+                    if down = '1' and prev_DOWN = '0' and mode_select = "010" then
+                        editEN <= '1';
+                        modeselectdisableAlarm  <= '1';
+                    end if;
+                else
+                    editEN <= '1';  -- Trvalo v móde úpravy
+                end if;
+                prev_DOWN <= down;
+
+                -- Úprava budíka
+                if editEN = '1' then
+                    if center = '1' and prev_CENTER = '0' then
+                        editEN <= '0';
+                        alarm_active <= '1';
+                        modeselectdisableAlarm  <= '0';
+                    end if;
+                    prev_CENTER <= center;
+
+                    -- Prepínanie medzi hodinami a minútami
+                    if (left = '1' and prev_LEFT = '0') or (right = '1' and prev_RIGHT = '0') then
+                        Sig_TimeEdit <= not Sig_TimeEdit;
+                    end if;
+                    prev_LEFT <= left;
+                    prev_RIGHT <= right;
+                    time_editAlarm <= Sig_TimeEdit;
+
+                    -- Zvýšenie času
+                    if up = '1' and prev_UP = '0' then
+                        if Sig_TimeEdit = '1' then
+                            if alarm_minutes < to_signed(59, 7) then
+                                alarm_minutes <= alarm_minutes + 1;
+                            else
+                                alarm_minutes <= to_signed(0, 7);
+                            end if;
+                        else
+                            if alarm_hours < to_signed(23, 7) then
+                                alarm_hours <= alarm_hours + 1;
+                            else
+                                alarm_hours <= to_signed(0, 7);
+                            end if;
+                        end if;
+                    end if;
+                    prev_UP <= up;
+
+                    -- Zníženie času
+                    if down = '1' and prev_DOWN = '0' then
+                        if Sig_TimeEdit = '1' then
+                            if alarm_minutes > to_signed(0, 7) then
+                                alarm_minutes <= alarm_minutes - 1;
+                            else
+                                alarm_minutes <= to_signed(59, 7);
+                            end if;
+                        else
+                            if alarm_hours > to_signed(0, 7) then
+                                alarm_hours <= alarm_hours - 1;
+                            else
+                                alarm_hours <= to_signed(23, 7);
+                            end if;
+                        end if;
+                    end if;
+                end if;
+
+                -- Kontrola času pre spustenie budíka
+                if alarm_active = '1' and
+                   hour10 = std_logic_vector(to_unsigned(to_integer(alarm_hours) / 10, 4)) and
+                   hour1  = std_logic_vector(to_unsigned(to_integer(alarm_hours) mod 10, 4)) and
+                   min10  = std_logic_vector(to_unsigned(to_integer(alarm_minutes) / 10, 4)) and
+                   min1   = std_logic_vector(to_unsigned(to_integer(alarm_minutes) mod 10, 4)) then
+                    alarm_out <= led_blink;
+                else
+                    alarm_out <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+
+end Behavioral;
+

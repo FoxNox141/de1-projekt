@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_TimeBlock_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="tb_TimeBlock" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,000.001 ns"></ZoomEndTime>
+      <Cursor1Time time="1,000.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="186"></NameColumnWidth>
+      <ValueColumnWidth column_width="81"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="17" />
+   <wvobject fp_name="/tb_TimeBlock/CLK100MHZ" type="logic">
+      <obj_property name="ElementShortName">CLK100MHZ</obj_property>
+      <obj_property name="ObjectShortName">CLK100MHZ</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/ModeSelect" type="array">
+      <obj_property name="ElementShortName">ModeSelect[2:0]</obj_property>
+      <obj_property name="ObjectShortName">ModeSelect[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/UP" type="logic">
+      <obj_property name="ElementShortName">UP</obj_property>
+      <obj_property name="ObjectShortName">UP</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/DOWN" type="logic">
+      <obj_property name="ElementShortName">DOWN</obj_property>
+      <obj_property name="ObjectShortName">DOWN</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/LEFT" type="logic">
+      <obj_property name="ElementShortName">LEFT</obj_property>
+      <obj_property name="ObjectShortName">LEFT</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/RIGHT" type="logic">
+      <obj_property name="ElementShortName">RIGHT</obj_property>
+      <obj_property name="ObjectShortName">RIGHT</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/CENTER" type="logic">
+      <obj_property name="ElementShortName">CENTER</obj_property>
+      <obj_property name="ObjectShortName">CENTER</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/SW" type="logic">
+      <obj_property name="ElementShortName">SW</obj_property>
+      <obj_property name="ObjectShortName">SW</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/TimeEdit" type="logic">
+      <obj_property name="ElementShortName">TimeEdit</obj_property>
+      <obj_property name="ObjectShortName">TimeEdit</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/ModeSelectDisable" type="logic">
+      <obj_property name="ElementShortName">ModeSelectDisable</obj_property>
+      <obj_property name="ObjectShortName">ModeSelectDisable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/Sec1" type="array">
+      <obj_property name="ElementShortName">Sec1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Sec1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/Sec10" type="array">
+      <obj_property name="ElementShortName">Sec10[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Sec10[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/Min1" type="array">
+      <obj_property name="ElementShortName">Min1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Min1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/Min10" type="array">
+      <obj_property name="ElementShortName">Min10[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Min10[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/Hour1" type="array">
+      <obj_property name="ElementShortName">Hour1[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Hour1[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/Hour10" type="array">
+      <obj_property name="ElementShortName">Hour10[3:0]</obj_property>
+      <obj_property name="ObjectShortName">Hour10[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_TimeBlock/clk_period" type="other">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+</wave_config>

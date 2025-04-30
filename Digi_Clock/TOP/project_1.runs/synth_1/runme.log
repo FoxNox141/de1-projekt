@@ -1,0 +1,372 @@
+
+*** Running vivado
+    with args -log TopLevel.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source TopLevel.tcl
+
+
+
+****** Vivado v2024.2 (64-bit)
+  **** SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+  **** IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+  **** SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+  **** Start of session at: Sun Apr 27 12:50:19 2025
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source TopLevel.tcl -notrace
+Command: synth_design -top TopLevel -part xc7a50ticsg324-1L
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a50ti'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a50ti'
+INFO: [Device 21-403] Loading part xc7a50ticsg324-1L
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 1376
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 1025.406 ; gain = 466.340
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'TopLevel' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:55]
+INFO: [Synth 8-3491] module 'Debounce_Top' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:4' bound to instance 'U_Debounce' of component 'Debounce_Top' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:224]
+INFO: [Synth 8-638] synthesizing module 'Debounce_Top' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:13]
+	Parameter N_PERIODS bound to: 100000 - type: integer 
+INFO: [Synth 8-3491] module 'clock_enable' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:34' bound to instance 'clk_gen' of component 'clock_enable' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:41]
+INFO: [Synth 8-638] synthesizing module 'clock_enable' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:43]
+	Parameter N_PERIODS bound to: 100000 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'clock_enable' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:43]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF0' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:53]
+INFO: [Synth 8-638] synthesizing module 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:13]
+INFO: [Synth 8-256] done synthesizing module 'DFF_Debouncing_Button' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:13]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF1' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:61]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF2' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:69]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF0' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:53]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF1' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:61]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF2' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:69]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF0' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:53]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF1' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:61]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF2' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:69]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF0' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:53]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF1' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:61]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF2' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:69]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF0' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:53]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF1' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:61]
+INFO: [Synth 8-3491] module 'DFF_Debouncing_Button' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/DFF_Debouncing_Button.vhd:4' bound to instance 'FF2' of component 'DFF_Debouncing_Button' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:69]
+INFO: [Synth 8-256] done synthesizing module 'Debounce_Top' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Debounce.vhd:13]
+INFO: [Synth 8-3491] module 'TimeBlock' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:5' bound to instance 'U_TimeBlock' of component 'TimeBlock' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:233]
+INFO: [Synth 8-638] synthesizing module 'TimeBlock' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:29]
+	Parameter N_PERIODS bound to: 100000000 - type: integer 
+INFO: [Synth 8-3491] module 'clock_enable' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:34' bound to instance 'CLK_Pulse' of component 'clock_enable' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:64]
+INFO: [Synth 8-638] synthesizing module 'clock_enable__parameterized1' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:43]
+	Parameter N_PERIODS bound to: 100000000 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'clock_enable__parameterized1' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:43]
+WARNING: [Synth 8-614] signal 'CLK_1s' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:77]
+WARNING: [Synth 8-614] signal 'CLK_1s_prev' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:77]
+WARNING: [Synth 8-614] signal 'editEN' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:77]
+WARNING: [Synth 8-614] signal 'seconds' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:77]
+INFO: [Synth 8-256] done synthesizing module 'TimeBlock' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:29]
+INFO: [Synth 8-3491] module 'stopwatch' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:5' bound to instance 'U_Stopwatch' of component 'Stopwatch' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:254]
+INFO: [Synth 8-638] synthesizing module 'stopwatch' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:22]
+	Parameter N_PERIODS bound to: 100000 - type: integer 
+INFO: [Synth 8-3491] module 'clock_enable' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:34' bound to instance 'CLK_PULSE' of component 'clock_enable' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:47]
+INFO: [Synth 8-256] done synthesizing module 'stopwatch' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:22]
+INFO: [Synth 8-3491] module 'Display' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Display.vhd:5' bound to instance 'Display_Module' of component 'Display' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:270]
+INFO: [Synth 8-638] synthesizing module 'Display' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Display.vhd:24]
+	Parameter N_PERIODS bound to: 10 - type: integer 
+INFO: [Synth 8-3491] module 'clock_enable' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:34' bound to instance 'CLK_Pulse' of component 'clock_enable' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Display.vhd:62]
+INFO: [Synth 8-638] synthesizing module 'clock_enable__parameterized4' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:43]
+	Parameter N_PERIODS bound to: 10 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'clock_enable__parameterized4' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:43]
+INFO: [Synth 8-3491] module 'bin2seg' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/bin2seg.vhd:34' bound to instance 'DISP' of component 'Bin2Seg' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Display.vhd:73]
+INFO: [Synth 8-638] synthesizing module 'bin2seg' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/bin2seg.vhd:40]
+INFO: [Synth 8-226] default block is never used [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/bin2seg.vhd:47]
+INFO: [Synth 8-256] done synthesizing module 'bin2seg' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/bin2seg.vhd:40]
+INFO: [Synth 8-226] default block is never used [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Display.vhd:133]
+INFO: [Synth 8-256] done synthesizing module 'Display' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Display.vhd:24]
+INFO: [Synth 8-3491] module 'alarm' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Alarm.vhd:5' bound to instance 'Alarm_Module' of component 'Alarm' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:288]
+INFO: [Synth 8-638] synthesizing module 'alarm' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Alarm.vhd:27]
+	Parameter N_PERIODS bound to: 10 - type: integer 
+INFO: [Synth 8-3491] module 'clock_enable' declared at 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/clock_enable.vhd:34' bound to instance 'CLK_Pulse' of component 'clock_enable' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Alarm.vhd:62]
+INFO: [Synth 8-256] done synthesizing module 'alarm' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Alarm.vhd:27]
+WARNING: [Synth 8-614] signal 'Sig_S_10M' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_S_1M' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_S_10s' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_S_1s' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_S_100ms' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_S_10ms' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_T_10H' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_T_1H' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_T_10m' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_T_1m' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_T_10s' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_T_1s' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_A_10H' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_A_1H' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_A_10m' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_A_1m' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_A_10s' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+WARNING: [Synth 8-614] signal 'Sig_A_1s' is read in the process but is not in the sensitivity list [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:309]
+INFO: [Synth 8-256] done synthesizing module 'TopLevel' (0#1) [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/TopLevel.vhd:55]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1138.922 ; gain = 579.855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1138.922 ; gain = 579.855
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1138.922 ; gain = 579.855
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1138.922 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/constrs_1/new/Nexys.xdc]
+WARNING: [Vivado 12-584] No ports matched 'DP'. [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/constrs_1/new/Nexys.xdc:63]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/constrs_1/new/Nexys.xdc:63]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+Finished Parsing XDC File [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/constrs_1/new/Nexys.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/constrs_1/new/Nexys.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/TopLevel_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/TopLevel_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1230.582 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1230.582 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1230.582 ; gain = 671.516
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a50ticsg324-1L
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1230.582 ; gain = 671.516
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1230.582 ; gain = 671.516
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1230.582 ; gain = 671.516
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    8 Bit       Adders := 6     
+	   2 Input    7 Bit       Adders := 9     
+	   2 Input    4 Bit       Adders := 19    
+	   2 Input    3 Bit       Adders := 2     
++---Registers : 
+	                8 Bit    Registers := 1     
+	                7 Bit    Registers := 5     
+	                4 Bit    Registers := 15    
+	                3 Bit    Registers := 2     
+	                1 Bit    Registers := 42    
++---Muxes : 
+	   2 Input    8 Bit        Muxes := 5     
+	   8 Input    8 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 30    
+	   5 Input    7 Bit        Muxes := 1     
+	   5 Input    6 Bit        Muxes := 1     
+	   2 Input    4 Bit        Muxes := 24    
+	   4 Input    4 Bit        Muxes := 7     
+	   3 Input    3 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 1     
+	   4 Input    2 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 60    
+	   3 Input    1 Bit        Muxes := 3     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 120 (col length:60)
+BRAMs: 150 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_TimeBlock/ModeSelectDisableTimer_reg/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:105]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:105]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:105]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_TimeBlock/Sec1_reg[3]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_TimeBlock/Sec1_reg[2]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_TimeBlock/Sec1_reg[1]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_TimeBlock/Sec1_reg[0]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:182]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_TimeBlock/Min1_reg[3]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_TimeBlock/Min1_reg[2]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_TimeBlock/Min1_reg[1]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_TimeBlock/Min1_reg[0]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Timer.vhd:184]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_Stopwatch/seconds10_reg_reg[3]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_Stopwatch/seconds10_reg_reg[2]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_Stopwatch/seconds10_reg_reg[1]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_Stopwatch/seconds10_reg_reg[0]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:67]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_Stopwatch/minutes10_reg_reg[3]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_Stopwatch/minutes10_reg_reg[2]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_Stopwatch/minutes10_reg_reg[1]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 1st driver pin 'U_Stopwatch/minutes10_reg_reg[0]/Q' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6859] multi-driven net on pin Q with 2nd driver pin 'GND' [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+CRITICAL WARNING: [Synth 8-6858] multi-driven net Q is connected to at least one constant driver which has been preserved, other driver is ignored [C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.srcs/sources_1/new/Stopwatch.vhd:69]
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 1230.582 ; gain = 671.516
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 1331.656 ; gain = 772.590
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 1361.230 ; gain = 802.164
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:24 ; elapsed = 00:00:25 . Memory (MB): peak = 1361.230 ; gain = 802.164
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.723 ; gain = 999.656
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.723 ; gain = 999.656
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.723 ; gain = 999.656
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.723 ; gain = 999.656
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.723 ; gain = 999.656
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.723 ; gain = 999.656
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     5|
+|3     |LUT1   |     3|
+|4     |LUT2   |     4|
+|5     |LUT3   |    10|
+|6     |LUT4   |     5|
+|7     |LUT5   |     4|
+|8     |LUT6   |    11|
+|9     |FDRE   |    30|
+|10    |IBUF   |     3|
+|11    |OBUF   |    16|
++------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.723 ; gain = 999.656
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 51 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:19 ; elapsed = 00:00:27 . Memory (MB): peak = 1558.723 ; gain = 907.996
+Synthesis Optimization Complete : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 1558.723 ; gain = 999.656
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1558.723 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 5 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1558.723 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: bf2347bb
+INFO: [Common 17-83] Releasing license: Synthesis
+65 Infos, 24 Warnings, 52 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 1558.723 ; gain = 1192.133
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1558.723 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.runs/synth_1/TopLevel.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file TopLevel_utilization_synth.rpt -pb TopLevel_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sun Apr 27 12:50:56 2025...

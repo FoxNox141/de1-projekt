@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Wed Apr 23 17:35:00 2025
+# Process ID: 12712
+# Current directory: C:/Users/240215/Dig/Projekt/project_1
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent5472 C:\Users\240215\Dig\Projekt\project_1\project_1.xpr
+# Log file: C:/Users/240215/Dig/Projekt/project_1/vivado.log
+# Journal file: C:/Users/240215/Dig/Projekt/project_1\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/240215/Dig/Projekt/project_1/project_1.xpr
+WARNING: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'C:/Users/240215/Dig/Projekt/project_1/project_1.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/appz/Xilinx/Vivado/2020.2/data/ip'.
+INFO: [IP_Flow 19-2338] Canceling the changes to the IP catalog. Reverting the catalog back to its previous state.
+INFO: [IP_Flow 19-2340] The IP catalog has been returned to its previous state.
+INFO: [Common 17-344] 'open_project' was cancelled
+exit
+INFO: [Common 17-206] Exiting Vivado at Wed Apr 23 17:35:18 2025...

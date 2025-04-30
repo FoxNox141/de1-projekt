@@ -1,0 +1,26 @@
+#-----------------------------------------------------------
+# Vivado v2024.2 (64-bit)
+# SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+# Start of session at: Sun Apr 27 12:47:42 2025
+# Process ID         : 18452
+# Current directory  : C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.runs/impl_1
+# Command line       : vivado.exe -log TimeBlock.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source TimeBlock.tcl -notrace
+# Log file           : C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.runs/impl_1/TimeBlock.vdi
+# Journal file       : C:/Users/Lukas/Desktop/skola/4sem/Dig/project_1/project_1.runs/impl_1\vivado.jou
+# Running On         : DESKTOP-9M4JBK0
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 19045
+# Processor Detail   : AMD Ryzen 5 3600 6-Core Processor              
+# CPU Frequency      : 3600 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 34282 MB
+# Swap memory        : 5100 MB
+# Total Virtual      : 39382 MB
+# Available Virtual  : 27374 MB
+#-----------------------------------------------------------
+source TimeBlock.tcl -notrace
+couldn't read file "TimeBlock.tcl": no such file or directory
+INFO: [Common 17-206] Exiting Vivado at Sun Apr 27 12:47:44 2025...
