@@ -66,35 +66,21 @@ Initially, the clock starts at 00:00:00
 [dig_clock testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_digital_clock.vhd)
 ![dig_clock simulation](Graphs/tb_digital_clock.png)
 
-### `time_comp_alarm.vhd`
-This module works both to remember the set alarm time from `clock_setter.vhd` module and to trigger the alarm at the correct time. By activating `button_set` we assign alarm-time values to internal signals `memory_mins` and `memory_hrs`. The alarm function is active only when `activate_sw_i` is in the 1 position. If the values of the set alarm time and the current time are equal, the alarm is triggered.
+### `Alarm.vhd`
+This module works both to remember the set alarm time and to trigger the alarm at the correct time. By pressing buttons RIGHT and LEFT we switch between hh/mm/ss and by pressing buttons DOWN and UP. The alarm function is active only when `alarm_active` is in the 1 position. If the values of the set alarm time and the current time are equal, the alarm is triggered.
 
 [time_comp_alarm testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_alarm.vhd)
 ![time_comp_alarm simulation](Graphs/tb_alarm.png)
 
 ### `button_debouncer.vhd`
-Mechanical pushbutton often generate fake transitions when pressed due to its mechanical nature. If we want to set the time using pushbuttons, these fake transitions would be very problematic and it is necessary to get rid of them. Module called `button_debouncer` is used to do the job. It consists of three D-latches connected in series. The first one takes the push button signal as its input. When the enable signal is on high level, the input gest shifted to the next latch. The outputs of all three latches are connected to an AND gate which output is output of the whole debouncer. `clock_enable.vhd` module is used as synchronous signal generator where its `g_MAX` value is set to 1 000 000 for 100 ms debounce delay.
+Mechanical buttons often generate fake transitions when pressed due to its mechanical nature. If we want to set the time using pushbuttons, fake transitions would be problematic and create imprecisions, so it is necessary to get rid of them. Module called `debounce` is used to do the job. It consists of three D-latches connected in series. The first one takes the push button signal as its input. When the enable signal is on high level, the input gest shifted to the next latch. The outputs of all three latches are connected to an AND gate which output is output of the whole debouncer. `clock_enable.vhd` module is used as synchronous signal generator where its `N_PERIODS` value is set to 1 000 000 for 100 ms debounce delay.
 
 [button_debouncer testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_button_debouncer.vhd)
 ![button_debouncer simulation](Graphs/tb_button_debouncer.png)
 
-### `clock_setter.vhd`
-Using this module, we set the time and choose whether it is the time from which the clock should continue to run or the time in which the alarm should be triggered. Apart from standard clock signal and enable signal, there are 2 buttons as inputs, using which we set the hours and minutes, and one switch, which we activate the module with. The outputs of this block are the values of the hours and minutes we set.
-
-[clock_setter testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_clock_setter.vhd)
-![clock_setter simulation](Graphs/tb_clock_setter.png)
-
 ### `cnt_up_down.vhd`
-Predesigned bidirectional counter from lab exercises used without any changes.
-
-[cnt_up_down testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_cnt_up_down.vhd)
-![cnt_up_down simulation](Graphs/tb_cnt_up_down.png)
 
 ### `hex_7seg.vhd`
-Predesigned 7-segment display decoder from lab exercises used without any changes.
-
-[hex_7seg testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_hex_7seg.vhd)
-![hex_7seg simulation](Graphs/tb_hex_7seg.png)
 
 ### `driver_7seg_6digits.vhd`
 Predesigned display driver from lab exercises modified to control 6 digits (hh:mm:ss).
