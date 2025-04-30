@@ -63,56 +63,37 @@ This module is responsible for the core operation of the digital clock. It recei
 
 Initially, the clock starts at 00:00:00
 
-[dig_clock testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_digital_clock.vhd)
+[dig_clock testbench](Digi_Clock/TimeBlock/Timer.vhd)
 ![dig_clock simulation](Graphs/tb_digital_clock.png)
 
 ### `Alarm.vhd`
 This module works both to remember the set alarm time and to trigger the alarm at the correct time. By pressing buttons RIGHT and LEFT we switch between hh/mm/ss and by pressing buttons DOWN and UP. The alarm function is active only when `alarm_active` is in the 1 position. If the values of the set alarm time and the current time are equal, the alarm is triggered.
 
-[time_comp_alarm testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_alarm.vhd)
+[time_comp_alarm testbench](Digi_Clock/TimeBlock/Alarm.vhd)
 ![time_comp_alarm simulation](Graphs/tb_alarm.png)
 
 ### `button_debouncer.vhd`
 Mechanical buttons often generate fake transitions when pressed due to its mechanical nature. If we want to set the time using pushbuttons, fake transitions would be problematic and create imprecisions, so it is necessary to get rid of them. Module called `debounce` is used to do the job. It consists of three D-latches connected in series. The first one takes the push button signal as its input. When the enable signal is on high level, the input gest shifted to the next latch. The outputs of all three latches are connected to an AND gate which output is output of the whole debouncer. `clock_enable.vhd` module is used as synchronous signal generator where its `N_PERIODS` value is set to 1 000 000 for 100 ms debounce delay.
 
-[button_debouncer testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_button_debouncer.vhd)
+[button_debouncer testbench](Digi_Clock/Buttons)
 ![button_debouncer simulation](Graphs/tb_button_debouncer.png)
+### `Stopwatch.vhd`
+This module, while active, starts at 0 hh/mm/ss and starts counting up upon a button press. Which then stops only when reaching maximum time to start again or if stopped manualy.
 
+
+## Other used modules, taken from exercises and unmodified
 ### `cnt_up_down.vhd`
 
-### `hex_7seg.vhd`
-
-### `driver_7seg_6digits.vhd`
-Predesigned display driver from lab exercises modified to control 6 digits (hh:mm:ss).
-
-[driver_7seg_6digits testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_driver_7seg_4digits.vhd)
-![driver_7seg_6digits simulation](Graphs/tb_driver_7seg_6digits.png)
-
-### `to_bcd_conv.vhd`
-The outputs of the `dig_clock.vhd` module are 6-bit vectors in case of minutes and seconds and a 5-bit vector in case of hours. This block is used to convert these vectors into two 4-bit BCD values, each representing one decimal digit, which then can be feed into the 7-segment driver.
-
-[to_bcd_conv testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_to_bcd_conv.vhd)
-![to_bcd_conv simulation](Graphs/tb_to_bcd_conv.png)
+### `bin2seg.vhd`
 
 ### `clock_enable.vhd`
-Predesigned clock enable signal generator from lab exercises used without any changes.
 
-[clock_enable testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_clock_enable.vhd)
-![clock_enable simulation](Graphs/tb_clock_enable.png)
-
-### `driver_dig_clock.vhd`
-This block is used to encapsulate the `dig_clock.vhd`, `clock_setter.vhd` and `time_comp_alarm.vhd` modules. In addition, it contains a multiplexer, which switches between the current time display and the time setting, depending on the selected mode.
-
-[driver_dig_clock testbench](Digital_Clock_Final/Digital_Clock_Final.srcs/sim_1/new/tb_driver_dig_clock.vhd)
-![driver_dig_clock simulation](Graphs/tb_driver_dig_clock.png)
-
-<a name="top"></a>
 
 ## TOP module description
 
 All the main blocks are interconnected in the `top.vhd` module and connected to hardware components.
 
-![top module scheme](Graphs/Full_scheme.png)
+![top module scheme](Graphs/top.png)
 
 <a name="video"></a>
 
