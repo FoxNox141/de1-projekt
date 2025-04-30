@@ -132,18 +132,18 @@ architecture Behavioral of TopLevel is
             clk_100mhz              : in  STD_LOGIC;  -- 100 MHz hodiny
             reset                   : in  STD_LOGIC;  -- Reset (SW)
             mode_select             : in  STD_LOGIC_VECTOR(2 downto 0);  -- Výber módu
-            up                      : in  STD_LOGIC;  -- Tlačidlo hore
-            down                    : in  STD_LOGIC;  -- Tlačidlo dole
-            left                    : in  STD_LOGIC;  -- Tlačidlo vľavo
-            right                   : in  STD_LOGIC;  -- Tlačidlo vpravo
-            center                  : in  STD_LOGIC;  -- Tlačidlo center
+            up                      : in  STD_LOGIC;  -- Tla�?idlo hore
+            down                    : in  STD_LOGIC;  -- Tla�?idlo dole
+            left                    : in  STD_LOGIC;  -- Tla�?idlo vľavo
+            right                   : in  STD_LOGIC;  -- Tla�?idlo vpravo
+            center                  : in  STD_LOGIC;  -- Tla�?idlo center
             hour10                  : in  STD_LOGIC_VECTOR(3 downto 0);  -- Desiatky hodín
             hour1                   : in  STD_LOGIC_VECTOR(3 downto 0);  -- Jednotky hodín
             min10                   : in  STD_LOGIC_VECTOR(3 downto 0);  -- Desiatky minút
             min1                    : in  STD_LOGIC_VECTOR(3 downto 0);  -- Jednotky minút
             -- Výstupy
             time_editAlarm               : out STD_LOGIC;  -- 0 = úprava hodín, 1 = úprava minút
-            modeselectdisableAlarm   : out STD_LOGIC;  -- Zakáže zmenu módu počas úpravy
+            modeselectdisableAlarm   : out STD_LOGIC;  -- Zakáže zmenu módu po�?as úpravy
             alarm_out               : out STD_LOGIC  -- Výstup pre LED signalizáciu budíka
          );
      end component;
@@ -234,7 +234,7 @@ begin
         
         Up_debounced <= buttons_clean(1);    
         
-        Sig_EditAdd <= buttons_clean(1);
+        Sig_EditAdd  <= buttons_clean(1);
         Sig_EditSubb <= buttons_clean(2);
         Sig_EditNext <= buttons_clean(4);
         Sig_EditBack <= buttons_clean(3);
@@ -314,15 +314,36 @@ begin
                 modeselectdisableAlarm  => Sig_ModeSelectDisableAlarm,
                 alarm_out =>LED16_B
                                 
-        );
-    
-    process(Sig_ModeSelect)
+        );        
+    process(clk100MHZ)
     begin
-        case to_integer(unsigned(Sig_ModeSelect)) is
+        if rising_edge(clk100MHZ) then
+            -- detekce náběžné hrany: 0 → 1
+            if(Sig_ModeSelectDisableAlarm)='0' and (Sig_ModeSelectDisableTimer)='0' then      
+                if (Up_prev = '0') and (Up_debounced = '1') then
+                    -- zvýšíme režim a obto�?íme přes 3 zpět na 0
+                     Sig_ModeSelect <= std_logic_vector((unsigned(Sig_ModeSelect) + 1) mod 3);
+                end if;
+        
+                -- aktualizujeme minulý stav
+                Up_prev <= Up_debounced;
+            end if;
+        end if;
+    end process; 
+    
+    process(Sig_TimeEditAlarm, Sig_TimeEditTimer)
+    begin
+        if (Sig_TimeEditAlarm = '1') or (Sig_TimeEditTimer = '1') then
+            Sig_TimeEdit <= '1';
+        else
+            Sig_TimeEdit <= '0';
+        end if;
+        
+               case to_integer(unsigned(Sig_ModeSelect)) is
             when 0 =>
                 -- StopWatch (např. použij hodnoty z chronometru)
                 Sig_Disp0 <= "0000"; --Symbol S
-                Sig_Disp1 <= "1111"; --Blind Segment
+                Sig_Disp1 <= "0000"; --Blind Segment
                 Sig_Disp2 <= Sig_S_10m;
                 Sig_Disp3 <= Sig_S_1m;
                 Sig_Disp4 <= Sig_S_10s;
@@ -333,7 +354,7 @@ begin
             when 1 =>
                 -- Timer
                 Sig_Disp0 <= "0001"; --Symbol t
-                Sig_Disp1 <= "1111";  --Blind Segment
+                Sig_Disp1 <= "0000";  --Blind Segment
                 Sig_Disp2 <= Sig_T_10h;
                 Sig_Disp3 <= Sig_T_1h;
                 Sig_Disp4 <= Sig_T_10m;
@@ -344,7 +365,7 @@ begin
             when 2 =>
                 -- Alarm
                 Sig_Disp0 <= "0010";--Symbol A
-                Sig_Disp1 <= "1111";--Blind Segment
+                Sig_Disp1 <= "0000";--Blind Segment
                 Sig_Disp2 <= Sig_A_10h;
                 Sig_Disp3 <= Sig_A_1h;
                 Sig_Disp4 <= Sig_A_10m;
@@ -362,31 +383,6 @@ begin
                 Sig_Disp6 <= "0000";
                 Sig_Disp7 <= "0000";
         end case;
-    end process;
-        
-    process(clk100MHZ)
-    begin
-        if rising_edge(clk100MHZ) then
-            -- detekce náběžné hrany: 0 → 1
-            if(Sig_ModeSelectDisableAlarm)='0' and (Sig_ModeSelectDisableTimer)='0' then      
-                if (Up_prev = '0') and (Up_debounced = '1') then
-                    -- zvýšíme režim a obtočíme přes 3 zpět na 0
-                     Sig_ModeSelect <= std_logic_vector((unsigned(Sig_ModeSelect) + 1) mod 3);
-                end if;
-        
-                -- aktualizujeme minulý stav
-                Up_prev <= Up_debounced;
-            end if;
-        end if;
-    end process; 
-    
-    process(Sig_TimeEditAlarm, Sig_TimeEditTimer)
-    begin
-        if (Sig_TimeEditAlarm = '1') or (Sig_TimeEditTimer = '1') then
-            Sig_TimeEdit <= '1';
-        else
-            Sig_TimeEdit <= '0';
-        end if;
     end process;
     
     CA <= Sig_segout(0);
