@@ -115,15 +115,15 @@ architecture Behavioral of TopLevel is
         port(
             clk_100mhz              : in  STD_LOGIC;  -- 1 kHz hodiny
             reset                   : in  STD_LOGIC;  -- Reset tla?idlo
-            start                   : in  STD_LOGIC;  -- �tart (UpBTN)
+            start                   : in  STD_LOGIC;  -- ï¿½tart (UpBTN)
             stop                    : in  STD_LOGIC;  -- Stop (DownBTN)
-            mode_select             : in  STD_LOGIC_VECTOR(2 downto 0); -- V�ber m�du
-            minutes10               : out STD_LOGIC_VECTOR(3 downto 0); -- Desiatky min�t
-            minutes1                : out STD_LOGIC_VECTOR(3 downto 0); -- Jednotky min�t
-            seconds10               : out STD_LOGIC_VECTOR(3 downto 0); -- Desiatky sek�nd
-            seconds1                : out STD_LOGIC_VECTOR(3 downto 0); -- Jednotky sek�nd
-            ms100                   : out STD_LOGIC_VECTOR(3 downto 0); -- Stovky milisek�nd
-            ms10                    : out STD_LOGIC_VECTOR(3 downto 0) -- Desiatky milisek�nd
+            mode_select             : in  STD_LOGIC_VECTOR(2 downto 0); -- Vï¿½ber mï¿½du
+            minutes10               : out STD_LOGIC_VECTOR(3 downto 0); -- Desiatky minï¿½t
+            minutes1                : out STD_LOGIC_VECTOR(3 downto 0); -- Jednotky minï¿½t
+            seconds10               : out STD_LOGIC_VECTOR(3 downto 0); -- Desiatky sekï¿½nd
+            seconds1                : out STD_LOGIC_VECTOR(3 downto 0); -- Jednotky sekï¿½nd
+            ms100                   : out STD_LOGIC_VECTOR(3 downto 0); -- Stovky milisekï¿½nd
+            ms10                    : out STD_LOGIC_VECTOR(3 downto 0) -- Desiatky milisekï¿½nd
         );
     end component;
  
@@ -131,20 +131,20 @@ architecture Behavioral of TopLevel is
         port(
             clk_100mhz              : in  STD_LOGIC;  -- 100 MHz hodiny
             reset                   : in  STD_LOGIC;  -- Reset (SW)
-            mode_select             : in  STD_LOGIC_VECTOR(2 downto 0);  -- Výber módu
-            up                      : in  STD_LOGIC;  -- Tla�?idlo hore
-            down                    : in  STD_LOGIC;  -- Tla�?idlo dole
-            left                    : in  STD_LOGIC;  -- Tla�?idlo vľavo
-            right                   : in  STD_LOGIC;  -- Tla�?idlo vpravo
-            center                  : in  STD_LOGIC;  -- Tla�?idlo center
-            hour10                  : in  STD_LOGIC_VECTOR(3 downto 0);  -- Desiatky hodín
-            hour1                   : in  STD_LOGIC_VECTOR(3 downto 0);  -- Jednotky hodín
-            min10                   : in  STD_LOGIC_VECTOR(3 downto 0);  -- Desiatky minút
-            min1                    : in  STD_LOGIC_VECTOR(3 downto 0);  -- Jednotky minút
-            -- Výstupy
-            time_editAlarm               : out STD_LOGIC;  -- 0 = úprava hodín, 1 = úprava minút
-            modeselectdisableAlarm   : out STD_LOGIC;  -- Zakáže zmenu módu po�?as úpravy
-            alarm_out               : out STD_LOGIC  -- Výstup pre LED signalizáciu budíka
+            mode_select             : in  STD_LOGIC_VECTOR(2 downto 0);  -- VÃ½ber mÃ³du
+            up                      : in  STD_LOGIC;  -- TlaÄ?idlo hore
+            down                    : in  STD_LOGIC;  -- TlaÄ?idlo dole
+            left                    : in  STD_LOGIC;  -- TlaÄ?idlo vÄ¾avo
+            right                   : in  STD_LOGIC;  -- TlaÄ?idlo vpravo
+            center                  : in  STD_LOGIC;  -- TlaÄ?idlo center
+            hour10                  : in  STD_LOGIC_VECTOR(3 downto 0);  -- Desiatky hodÃ­n
+            hour1                   : in  STD_LOGIC_VECTOR(3 downto 0);  -- Jednotky hodÃ­n
+            min10                   : in  STD_LOGIC_VECTOR(3 downto 0);  -- Desiatky minÃºt
+            min1                    : in  STD_LOGIC_VECTOR(3 downto 0);  -- Jednotky minÃºt
+            -- VÃ½stupy
+            time_editAlarm               : out STD_LOGIC;  -- 0 = Ãºprava hodÃ­n, 1 = Ãºprava minÃºt
+            modeselectdisableAlarm   : out STD_LOGIC;  -- ZakÃ¡Å¾e zmenu mÃ³du poÄ?as Ãºpravy
+            alarm_out               : out STD_LOGIC  -- VÃ½stup pre LED signalizÃ¡ciu budÃ­ka
          );
      end component;
  
@@ -203,7 +203,7 @@ architecture Behavioral of TopLevel is
     signal Sig_A_10s               :STD_LOGIC_VECTOR (3 downto 0):="0000";
     signal Sig_A_1s                :STD_LOGIC_VECTOR (3 downto 0):="0000";
     
-        -- Sign�ly pro segmenty displeje
+        -- Signï¿½ly pro segmenty displeje
     signal Sig_Disp0                 :STD_LOGIC_VECTOR (3 downto 0):="0000";
     signal Sig_Disp1                 :STD_LOGIC_VECTOR (3 downto 0):="0000";
     signal Sig_Disp2                 :STD_LOGIC_VECTOR (3 downto 0):="0000";
@@ -223,7 +223,7 @@ architecture Behavioral of TopLevel is
     
 begin
     buttons_raw <= BTNR & BTNL & BTND & BTNU & BTNC;
-    -- Debounce v�ech 5 tla?�tek: {BTNR, BTNL, BTND, BTNU, BTNC}
+    -- Debounce vï¿½ech 5 tla?ï¿½tek: {BTNR, BTNL, BTND, BTNU, BTNC}
     U_Debounce : Debounce_Top
         port map(
             clk       => CLK100MHZ,
@@ -267,7 +267,7 @@ begin
             reset       => Sig_EditDone,
             start       => Sig_EditAdd,
             stop        => Sig_EditSubb,
-            mode_select => Sig_ModeSelect,  -- m?�e� pozd?ji ud?lat ?�zen� podle SW
+            mode_select => Sig_ModeSelect,  -- m?ï¿½eï¿½ pozd?ji ud?lat ?ï¿½zenï¿½ podle SW
             minutes10   => Sig_S_10M,
             minutes1    => Sig_S_1M,
             seconds10   => Sig_S_10s,
@@ -305,10 +305,10 @@ begin
                 LEFT               => Sig_EditNext,
                 RIGHT              => Sig_EditBack,
                 CENTER             => Sig_EditDone,
-                Min1               => Sig_S_1M,
-                Min10              => Sig_S_10M,
-                Hour1              => Sig_T_1H,
-                Hour10             => Sig_T_10H,
+                Min1               => Sig_A_1M,
+                Min10              => Sig_A_10M,
+                Hour1              => Sig_A_1H,
+                Hour10             => Sig_A_10H,
                               
                 Time_EditAlarm           => Sig_TimeEditAlarm,
                 modeselectdisableAlarm  => Sig_ModeSelectDisableAlarm,
@@ -318,14 +318,14 @@ begin
     process(clk100MHZ)
     begin
         if rising_edge(clk100MHZ) then
-            -- detekce náběžné hrany: 0 → 1
+            -- detekce nÃ¡bÄÅ¾nÃ© hrany: 0 â 1
             if(Sig_ModeSelectDisableAlarm)='0' and (Sig_ModeSelectDisableTimer)='0' then      
                 if (Up_prev = '0') and (Up_debounced = '1') then
-                    -- zvýšíme režim a obto�?íme přes 3 zpět na 0
+                    -- zvÃ½Å¡Ã­me reÅ¾im a obtoÄ?Ã­me pÅes 3 zpÄt na 0
                      Sig_ModeSelect <= std_logic_vector((unsigned(Sig_ModeSelect) + 1) mod 3);
                 end if;
         
-                -- aktualizujeme minulý stav
+                -- aktualizujeme minulÃ½ stav
                 Up_prev <= Up_debounced;
             end if;
         end if;
@@ -341,7 +341,7 @@ begin
         
                case to_integer(unsigned(Sig_ModeSelect)) is
             when 0 =>
-                -- StopWatch (např. použij hodnoty z chronometru)
+                -- StopWatch (napÅ. pouÅ¾ij hodnoty z chronometru)
                 Sig_Disp0 <= "0000"; --Symbol S
                 Sig_Disp1 <= "0000"; --Blind Segment
                 Sig_Disp2 <= Sig_S_10m;
