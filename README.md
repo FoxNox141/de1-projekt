@@ -99,9 +99,10 @@ Code of the TOP module can be found here:
 
 ![top module scheme](Graphs/top.png)
 
-<a name="video"></a>
-
-
+## Schematics for Timer and Stopwatch
+Mindmaps for structure of these modules
+![Timer module scheme](Graphs/Timer.png)
+![Stopwatch module scheme](Graphs/SW.png)
 ## References
 
 
