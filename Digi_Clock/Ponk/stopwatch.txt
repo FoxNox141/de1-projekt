@@ -1,0 +1,109 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity stopwatch is
+    Port (
+        clk      : in  STD_LOGIC;  -- 50 MHz hodiny
+        btnC     : in  STD_LOGIC;  -- Reset (BTNC) - debouncovaný
+        btnU     : in  STD_LOGIC;  -- Štart/stop (BTNU) - debouncovaný
+        seg      : out STD_LOGIC_VECTOR(6 downto 0);  -- 7-segmentový displej
+        an       : out STD_LOGIC_VECTOR(3 downto 0);  -- Anódy
+        led      : out STD_LOGIC  -- Testovacia LEDka (na overenie count_enable)
+    );
+end stopwatch;
+
+architecture Behavioral of stopwatch is
+    signal count_enable : STD_LOGIC := '0';
+    signal seconds      : unsigned(6 downto 0) := (others => '0');
+    signal clk_div      : unsigned(25 downto 0) := (others => '0');
+    signal refresh      : unsigned(15 downto 0) := (others => '0');
+    signal digit_sel    : STD_LOGIC;
+    signal bcd          : STD_LOGIC_VECTOR(3 downto 0);
+
+    -- Nové: Ukladáme predchádzajúce stavy debouncovaných tlačidiel
+    signal btnC_prev, btnU_prev : STD_LOGIC := '0';
+
+begin
+
+    -- Ovládanie štart/stop a reset
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            -- Na detekciu hrany porovnávame s predchádzajúcim stavom
+            if btnC = '1' and btnC_prev = '0' then
+                count_enable <= '0';
+                seconds <= (others => '0');
+                clk_div <= (others => '0');
+            elsif btnU = '1' and btnU_prev = '0' then
+                count_enable <= not count_enable;
+            end if;
+
+            -- Uloženie predchádzajúcich stavov
+            btnC_prev <= btnC;
+            btnU_prev <= btnU;
+        end if;
+    end process;
+
+    -- Testovacia LEDka (zobrazuje stav count_enable)
+    led <= count_enable;
+
+    -- Počítanie sekúnd
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            if count_enable = '1' then
+                if clk_div = 50000000 - 1 then
+                    clk_div <= (others => '0');
+                    if seconds < 99 then
+                        seconds <= seconds + 1;
+                    else
+                        seconds <= (others => '0');
+                    end if;
+                else
+                    clk_div <= clk_div + 1;
+                end if;
+            end if;
+        end if;
+    end process;
+
+    -- Refresh displeja
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            refresh <= refresh + 1;
+        end if;
+    end process;
+    digit_sel <= refresh(15);
+
+    -- Multiplexovanie displeja
+    process(digit_sel, seconds)
+    begin
+        if digit_sel = '0' then
+            bcd <= std_logic_vector(seconds(3 downto 0));  -- Jednotky
+            an <= "1101";  -- AN1
+        else
+            bcd <= '0' & std_logic_vector(seconds(6 downto 4));  -- Desiatky
+            an <= "1110";  -- AN0
+        end if;
+    end process;
+
+    -- BCD na 7-segmentový kód
+    process(bcd)
+    begin
+        case bcd is
+            when "0000" => seg <= "0000001";  -- 0
+            when "0001" => seg <= "1001111";  -- 1
+            when "0010" => seg <= "0010010";  -- 2
+            when "0011" => seg <= "0000110";  -- 3
+            when "0100" => seg <= "1001100";  -- 4
+            when "0101" => seg <= "0100100";  -- 5
+            when "0110" => seg <= "0100000";  -- 6
+            when "0111" => seg <= "0001111";  -- 7
+            when "1000" => seg <= "0000000";  -- 8
+            when "1001" => seg <= "0000100";  -- 9
+            when others => seg <= "1111111";  -- Vypnuté
+        end case;
+    end process;
+
+end Behavioral;

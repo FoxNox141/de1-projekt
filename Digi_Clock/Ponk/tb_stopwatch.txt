@@ -1,0 +1,99 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity tb_stopwatch is
+end tb_stopwatch;
+
+architecture Behavioral of tb_stopwatch is
+    -- Deklarácia komponentu podľa názvu entity v stopwatch.vhd
+    component stopwatch
+        Port (
+            clk   : in  STD_LOGIC;
+            btnC  : in  STD_LOGIC;
+            btnU  : in  STD_LOGIC;
+            seg   : out STD_LOGIC_VECTOR(6 downto 0);
+            an    : out STD_LOGIC_VECTOR(3 downto 0);
+            led   : out STD_LOGIC
+        );
+    end component;
+
+    -- Signály pre prepojenie s DUT
+    signal clk   : STD_LOGIC := '0';
+    signal btnC  : STD_LOGIC := '0';
+    signal btnU  : STD_LOGIC := '0';
+    signal seg   : STD_LOGIC_VECTOR(6 downto 0);
+    signal an    : STD_LOGIC_VECTOR(3 downto 0);
+    signal led   : STD_LOGIC;
+
+    -- Skrátený clock period pre simuláciu
+    constant clk_period : time := 20 ns;  -- 50 MHz
+
+begin
+    -- Pripojenie hlavného modulu
+    uut: stopwatch
+        port map (
+            clk   => clk,
+            btnC  => btnC,
+            btnU  => btnU,
+            seg   => seg,
+            an    => an,
+            led   => led
+        );
+
+    -- Generovanie hodín
+    clk_process : process
+    begin
+        while now < 2 ms loop
+            clk <= '0';
+            wait for clk_period / 2;
+            clk <= '1';
+            wait for clk_period / 2;
+        end loop;
+        wait;
+    end process;
+
+    -- Simulačný proces vstupov
+    stim_proc: process
+    begin
+        -- Inicializácia
+        wait for 100 ns;
+
+        -- Reset (btnC pulz)
+        btnC <= '1';
+        wait for 40 ns;
+        btnC <= '0';
+        wait for 100 ns;
+
+        -- Štart (btnU pulz)
+        btnU <= '1';
+        wait for 40 ns;
+        btnU <= '0';
+
+        -- Simulácia "behu"
+        wait for 1 ms;
+
+        -- Stop
+        btnU <= '1';
+        wait for 40 ns;
+        btnU <= '0';
+
+        -- Pauza
+        wait for 500 ns;
+
+        -- Opätovný štart
+        btnU <= '1';
+        wait for 40 ns;
+        btnU <= '0';
+
+        wait for 1 ms;
+
+        -- Reset
+        btnC <= '1';
+        wait for 40 ns;
+        btnC <= '0';
+
+        wait;
+    end process;
+
+end Behavioral;

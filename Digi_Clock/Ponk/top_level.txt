@@ -1,0 +1,93 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity top_level is
+    Port ( clk   : in STD_LOGIC;
+           btnC  : in STD_LOGIC;
+           btnU  : in STD_LOGIC;
+           seg   : out STD_LOGIC_VECTOR(6 downto 0);
+           an    : out STD_LOGIC_VECTOR(3 downto 0);
+           led   : out STD_LOGIC);
+end top_level;
+
+architecture Behavioral of top_level is
+
+    -- Komponent stopwatch, ktorý sa prepojí s hlavnou logikou
+    component stopwatch
+        Port ( clk   : in STD_LOGIC;
+               btnC  : in STD_LOGIC;
+               btnU  : in STD_LOGIC;
+               seg   : out STD_LOGIC_VECTOR(6 downto 0);
+               an    : out STD_LOGIC_VECTOR(3 downto 0);
+               led   : out STD_LOGIC );
+    end component;
+
+    -- Signály pre prepojenie s komponentom
+    signal clk_int : STD_LOGIC;
+    signal btnC_int : STD_LOGIC;
+    signal btnU_int : STD_LOGIC;
+    signal seg_int : STD_LOGIC_VECTOR(6 downto 0);
+    signal an_int : STD_LOGIC_VECTOR(3 downto 0);
+    signal led_int : STD_LOGIC;
+
+begin
+
+    -- Prepojenie signálov medzi top-level a stopwatch
+    uut: stopwatch
+        port map (
+            clk   => clk_int,
+            btnC  => btnC_int,
+            btnU  => btnU_int,
+            seg   => seg_int,
+            an    => an_int,
+            led   => led_int
+        );
+
+    -- Generovanie hodín pre testovanie (clock)
+    clk_process : process
+    begin
+        clk_int <= '0';
+        wait for 10 ns;  -- Clock period 20 ns (50 MHz)
+        clk_int <= '1';
+        wait for 10 ns;
+    end process;
+
+    
+    stim_proc: process
+    begin
+        -- Test začiatok
+        btnC_int <= '0';
+        btnU_int <= '0';
+        wait for 100 ns;
+
+        -- Reset (btnC)
+        btnC_int <= '1';
+        wait for 40 ns;
+        btnC_int <= '0';
+        wait for 100 ns;
+
+        -- Štart/stop (btnU)
+        btnU_int <= '1';
+        wait for 40 ns;
+        btnU_int <= '0';
+
+        wait for 500 ns; -- Čakanie
+
+        -- Opätovný štart
+        btnU_int <= '1';
+        wait for 40 ns;
+        btnU_int <= '0';
+
+        wait for 500 ns;
+
+        -- Reset po teste
+        btnC_int <= '1';
+        wait for 40 ns;
+        btnC_int <= '0';
+
+        wait;
+    end process;
+
+end Behavioral;

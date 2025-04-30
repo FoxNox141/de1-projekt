@@ -1,0 +1,188 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity alarm is
+    Port (
+        -- Vstupy
+        clk_100mhz     : in  STD_LOGIC;  -- 100 MHz hodiny
+        reset          : in  STD_LOGIC;  -- Reset (SW)
+        mode_select    : in  STD_LOGIC_VECTOR(2 downto 0);  -- Výber módu
+        up             : in  STD_LOGIC;  -- Tlačidlo hore
+        down           : in  STD_LOGIC;  -- Tlačidlo dole
+        left           : in  STD_LOGIC;  -- Tlačidlo vľavo
+        right          : in  STD_LOGIC;  -- Tlačidlo vpravo
+        center         : in  STD_LOGIC;  -- Tlačidlo center
+        hour10         : in  STD_LOGIC_VECTOR(3 downto 0);  -- Desiatky hodín (z TimeBlock)
+        hour1          : in  STD_LOGIC_VECTOR(3 downto 0);  -- Jednotky hodín (z TimeBlock)
+        min10          : in  STD_LOGIC_VECTOR(3 downto 0);  -- Desiatky minút (z TimeBlock)
+        min1           : in  STD_LOGIC_VECTOR(3 downto 0);  -- Jednotky minút (z TimeBlock)
+        -- Výstupy
+        time_edit      : out STD_LOGIC;  -- Indikuje úpravu hodín (0) alebo minút (1)
+        mode_select_disable : out STD_LOGIC;  -- Zakáže zmenu módu počas úpravy
+        alarm_out      : out STD_LOGIC  -- Výstup na signalizáciu budíka (LED)
+    );
+end alarm;
+
+architecture Behavioral of alarm is
+    -- Signály pre budík
+    signal alarm_hours     : signed(6 downto 0) := (others => '0');  -- Hodiny budíka (0-23)
+    signal alarm_minutes   : signed(6 downto 0) := (others => '0');  -- Minúty budíka (0-59)
+    signal alarm_active    : STD_LOGIC := '0';  -- Indikuje, či je budík aktívny
+
+    -- Edit control
+    signal editEN          : STD_LOGIC := '0';  -- Povolenie úpravy
+    signal Sig_TimeEdit    : STD_LOGIC := '0';  -- 0 = úprava hodín, 1 = úprava minút
+
+    -- Detekcia hrán
+    signal prev_UP         : STD_LOGIC := '0';
+    signal prev_DOWN       : STD_LOGIC := '0';
+    signal prev_LEFT       : STD_LOGIC := '0';
+    signal prev_RIGHT      : STD_LOGIC := '0';
+    signal prev_CENTER     : STD_LOGIC := '0';
+
+    -- Signál pre blikanie LED (1 Hz)
+    signal clk_1hz         : STD_LOGIC := '0';
+    signal counter         : integer range 0 to 49_999_999 := 0;
+    signal led_blink       : STD_LOGIC := '0';
+
+begin
+    -- Generovanie 1 Hz signálu na blikanie LED (100 MHz / 2 / 50_000_000 = 1 Hz)
+    process(clk_100mhz)
+    begin
+        if rising_edge(clk_100mhz) then
+            if counter = 49_999_999 then
+                counter <= 0;
+                clk_1hz <= not clk_1hz;
+            else
+                counter <= counter + 1;
+            end if;
+        end if;
+    end process;
+
+    -- Blikanie LED (zap/vyp každú sekundu)
+    process(clk_1hz)
+    begin
+        if rising_edge(clk_1hz) then
+            led_blink <= not led_blink;
+        end if;
+    end process;
+
+    -- Hlavný proces alarmu
+    process(clk_100mhz)
+    begin
+        if rising_edge(clk_100mhz) then
+            -- Reset
+            if reset = '1' then
+                alarm_hours <= (others => '0');
+                alarm_minutes <= (others => '0');
+                alarm_active <= '0';
+                editEN <= '0';
+                Sig_TimeEdit <= '0';
+                prev_UP <= '0';
+                prev_DOWN <= '0';
+                prev_LEFT <= '0';
+                prev_RIGHT <= '0';
+                prev_CENTER <= '0';
+                alarm_out <= '0';
+                time_edit <= '0';
+                mode_select_disable <= '0';
+            else
+                -- Edit Enable Trigger
+                if editEN = '0' then
+                    if DOWN = '1' and prev_DOWN = '0' then
+                        prev_DOWN <= '1';
+                        if mode_select = "010" then
+                            editEN <= '1';
+                            mode_select_disable <= '1';
+                        end if;
+                    else
+                        mode_select_disable <= '0';    
+                    end if;
+                else
+                    editEN <= '1';
+                end if;
+
+                -- Edit Time
+                if editEN = '1' then
+                    if CENTER = '1' and prev_CENTER = '0' then
+                        editEN <= '0';
+                        prev_CENTER <= '1';
+                        mode_select_disable <= '0';
+                        alarm_active <= '1';  -- Zapni budík po ukončení nastavenia
+                    else
+                        prev_CENTER <= CENTER;
+
+                        if LEFT = '1' and prev_LEFT = '0' then
+                            time_edit <= not Sig_TimeEdit;
+                            Sig_TimeEdit <= not Sig_TimeEdit;                                                
+                            prev_LEFT <= '1';
+                        else
+                            prev_LEFT <= LEFT;
+                        end if;
+
+                        if RIGHT = '1' and prev_RIGHT = '0' then
+                            time_edit <= not Sig_TimeEdit;
+                            Sig_TimeEdit <= not Sig_TimeEdit;                                                
+                            prev_RIGHT <= '1';
+                        else
+                            prev_RIGHT <= RIGHT;
+                        end if;
+
+                        -- When UP is pressed and we're in editing mode
+                        if (UP = '1' and prev_UP = '0') then
+                            prev_UP <= '1';
+                            if (Sig_TimeEdit = '0') then  -- Editing minutes
+                                if (alarm_minutes < to_signed(59, 7)) then
+                                    alarm_minutes <= alarm_minutes + 1;
+                                else
+                                    alarm_minutes <= to_signed(0, 7);  -- Wrap around to 0 minutes if minutes go above 59
+                                end if;
+                            else  -- Editing hours
+                                if (alarm_hours < to_signed(23, 7)) then
+                                    alarm_hours <= alarm_hours + 1;
+                                else
+                                    alarm_hours <= to_signed(0, 7);  -- Wrap around to 0 hours if hours go above 23
+                                end if;
+                            end if;
+                        else
+                            prev_UP <= UP;
+                        end if;
+                        
+                        -- When DOWN is pressed and we're in editing mode
+                        if (DOWN = '1' and prev_DOWN = '0') then
+                            prev_DOWN <= '1';
+                            if (Sig_TimeEdit = '0') then  -- Editing minutes
+                                if (alarm_minutes > to_signed(0, 7)) then
+                                    alarm_minutes <= alarm_minutes - 1;
+                                else
+                                    alarm_minutes <= to_signed(59, 7);  -- Wrap around to 59 minutes if minutes go below 0
+                                end if;
+                            else  -- Editing hours
+                                if (alarm_hours > to_signed(0, 7)) then
+                                    alarm_hours <= alarm_hours - 1;
+                                else
+                                    alarm_hours <= to_signed(23, 7);  -- Wrap around to 23 hours if hours go below 0
+                                end if;
+                            end if;
+                        else
+                            prev_DOWN <= DOWN;
+                        end if;                 
+                    end if;
+                end if;
+
+                -- Porovnanie aktuálneho času s nastaveným časom budíka
+                if alarm_active = '1' and
+                   hour10 = std_logic_vector(to_unsigned(to_integer(alarm_hours) / 10, 4)) and
+                   hour1 = std_logic_vector(to_unsigned(to_integer(alarm_hours) mod 10, 4)) and
+                   min10 = std_logic_vector(to_unsigned(to_integer(alarm_minutes) / 10, 4)) and
+                   min1 = std_logic_vector(to_unsigned(to_integer(alarm_minutes) mod 10, 4)) then
+                    alarm_out <= led_blink;  -- Blikanie LED, keď budík zvoní
+                else
+                    alarm_out <= '0';
+                end if;
+            end if;
+        end if;
+    end process;
+
+end Behavioral;
