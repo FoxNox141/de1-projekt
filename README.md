@@ -21,7 +21,7 @@
 
 Project goal is to implement digital clock on Nexys A7-50T board, including time setting and alarm function all in hh:mm:ss format.
 
-The clock is controlled by 5 buttons and 2 switches. The output peripherals are an integrated eight digit 7-segment display (only 6 digits are used in this project) and an RGB LED implementing the alarm function.
+The clock is controlled by 5 buttons. The output peripherals are an integrated eight digit 7-segment display and an RGB LED implementing the alarm function.
 
 
 
@@ -34,8 +34,8 @@ The clock is controlled by 5 buttons and 2 switches. The output peripherals are 
 
 | **Callout** | **Component Description** | **Callout** | **Component Description** |
    | :-: | :-: | :-: | :-: |
-   | 1 | 	Power jack | 16 | JTAG port for (optional) external cable |
-   | 2 | 	Power switch | 17 | Tri-color (RGB) LEDs |
+   | 1 | Power jack | 16 | JTAG port for (optional) external cable |
+   | 2 | Power switch | 17 | Tri-color (RGB) LEDs |
    | 3 | USB host connector | 18 | Slide switches (16) |
    | 4 | PIC24 programming port (factory use) | 19 | LEDs (16) |
    | 5 | Ethernet connector | 20 | Power supply test point(s) |
