@@ -63,23 +63,25 @@ This module is responsible for the core operation of the digital clock. It recei
 
 Initially, the clock starts at 00:00:00
 
-[dig_clock testbench](Digi_Clock/TimeBlock/Timer.vhd)
+[Timer code](Digi_Clock/TimeBlock/Timer.vhd)
+[Timer testbench](Digi_Clock/TestBenches/TB_TimeBlock.vhd)
 ![dig_clock simulation](Graphs/tb_digital_clock.png)
 
 ### `Alarm.vhd`
 This module works both to remember the set alarm time and to trigger the alarm at the correct time. By pressing buttons RIGHT and LEFT we switch between hh/mm/ss and by pressing buttons DOWN and UP. The alarm function is active only when `alarm_active` is in the 1 position. If the values of the set alarm time and the current time are equal, the alarm is triggered.
 
-[time_comp_alarm testbench](Digi_Clock/TimeBlock/Alarm.vhd)
-![time_comp_alarm simulation](Graphs/tb_alarm.png)
+[alarm testbench](Digi_Clock/TimeBlock/Alarm.vhd)
+![alarm simulation](Graphs/tb_alarm.png)
+
+### `Stopwatch.vhd`
+This module, while active, starts at 0 hh/mm/ss and starts counting up upon a button press. Which then stops only when reaching maximum time to start again or if stopped manualy.
+[Stopwatch testbench](Digi_Clock/TimeBlock/Stopwatch.vhd)
 
 ### `button_debouncer.vhd`
 Mechanical buttons often generate fake transitions when pressed due to its mechanical nature. If we want to set the time using pushbuttons, fake transitions would be problematic and create imprecisions, so it is necessary to get rid of them. Module called `debounce` is used to do the job. It consists of three D-latches connected in series. The first one takes the push button signal as its input. When the enable signal is on high level, the input gest shifted to the next latch. The outputs of all three latches are connected to an AND gate which output is output of the whole debouncer. `clock_enable.vhd` module is used as synchronous signal generator where its `N_PERIODS` value is set to 1 000 000 for 100 ms debounce delay.
 
 [button_debouncer testbench](Digi_Clock/Buttons)
 ![button_debouncer simulation](Graphs/tb_button_debouncer.png)
-### `Stopwatch.vhd`
-This module, while active, starts at 0 hh/mm/ss and starts counting up upon a button press. Which then stops only when reaching maximum time to start again or if stopped manualy.
-[button_debouncer testbench](Digi_Clock/TimeBlock/Stopwatch.vhd)
 
 ## Other used modules, taken from exercises and unmodified
 ### `cnt_up_down.vhd`
@@ -93,7 +95,7 @@ This module, while active, starts at 0 hh/mm/ss and starts counting up upon a bu
 
 All the main blocks are interconnected in the `top.vhd` module and connected to hardware components.
 Code of the TOP module can be found here:
-[button_debouncer testbench](Digi_Clock/TOP/TopLevel.vhd)
+[TOP](Digi_Clock/TOP/TopLevel.vhd)
 
 ![top module scheme](Graphs/top.png)
 
