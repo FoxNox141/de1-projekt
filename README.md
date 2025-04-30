@@ -53,8 +53,20 @@ The clock is controlled by 5 buttons and 2 switches. The output peripherals are 
    #### BASIC I/O schematic
    ![nexys basic scheme](Graphs/nexys_basic_scheme.png)
    
-.
-<a name="modules"></a>
+## TOP module description
+
+All the main blocks are interconnected in the `top.vhd` module and connected to hardware components.
+Code of the TOP module can be found here:
+[TOP](Digi_Clock/TOP/TopLevel.vhd)
+
+![top module scheme](Graphs/top.png)
+
+## Schematics for Timer and Stopwatch
+Mindmaps for structure of these modules
+![Timer module scheme](Graphs/Timer.png)
+![Stopwatch module scheme](Graphs/SW.png)
+## References
+
 
 ## VHDL modules description
 
@@ -90,19 +102,5 @@ Mechanical buttons often generate fake transitions when pressed due to its mecha
 
 ### `clock_enable.vhd`
 
-
-## TOP module description
-
-All the main blocks are interconnected in the `top.vhd` module and connected to hardware components.
-Code of the TOP module can be found here:
-[TOP](Digi_Clock/TOP/TopLevel.vhd)
-
-![top module scheme](Graphs/top.png)
-
-## Schematics for Timer and Stopwatch
-Mindmaps for structure of these modules
-![Timer module scheme](Graphs/Timer.png)
-![Stopwatch module scheme](Graphs/SW.png)
-## References
 
 
