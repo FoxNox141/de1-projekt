@@ -79,7 +79,7 @@ Mechanical buttons often generate fake transitions when pressed due to its mecha
 ![button_debouncer simulation](Graphs/tb_button_debouncer.png)
 ### `Stopwatch.vhd`
 This module, while active, starts at 0 hh/mm/ss and starts counting up upon a button press. Which then stops only when reaching maximum time to start again or if stopped manualy.
-
+[button_debouncer testbench](Digi_Clock/TimeBlock/Stopwatch.vhd)
 
 ## Other used modules, taken from exercises and unmodified
 ### `cnt_up_down.vhd`
@@ -92,6 +92,8 @@ This module, while active, starts at 0 hh/mm/ss and starts counting up upon a bu
 ## TOP module description
 
 All the main blocks are interconnected in the `top.vhd` module and connected to hardware components.
+Code of the TOP module can be found here:
+[button_debouncer testbench](Digi_Clock/TOP/TopLevel.vhd)
 
 ![top module scheme](Graphs/top.png)
 
